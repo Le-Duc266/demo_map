@@ -1,0 +1,99 @@
+server:
+  port: 8084
+  shutdown: graceful
+  tomcat:
+    threads:
+      max: 500
+      min-spare: 20
+    max-connections: 500
+    accept-count: 200
+    max-http-form-post-size: 10MB
+
+logging:
+  level:
+    ROOT: INFO
+    com.afs.backend.base: INFO
+    com.afs.backend.uaa: INFO
+
+spring:
+  application:
+    name: product-service
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 10MB
+  jpa:
+    show-sql: true
+    open-in-view: false
+    properties:
+      hibernate.jdbc.time_zone: UTC
+      hibernate.id.new_generator_mappings: true
+      hibernate.cache.use_second_level_cache: false
+      hibernate.cache.use_query_cache: false
+      hibernate.generate_statistics: false
+      hibernate.jdbc.lob.non_contextual_creation: true
+      # modify batch size as necessary
+      hibernate.jdbc.batch_size: 25
+      hibernate.order_inserts: true
+      hibernate.order_updates: true
+      hibernate.query.fail_on_pagination_over_collection_fetch: true
+      hibernate.query.in_clause_parameter_padding: true
+    hibernate:
+      ddl-auto: none
+      naming:
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+
+  # Remove when testing done
+  liquibase:
+    enabled: true
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/shoe_map?useSSL=false&useUnicode=true&characterEncoding=UTF-8&allowPublicKeyRetrieval=true
+    username: postgres
+    password: 123
+    driver-class-name: org.postgresql.Driver
+
+
+eureka:
+  client:
+    enabled: false
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+
+
+cloud:
+  cloudinary:
+    cloud-name: dgaizl2xm
+    api-key: 929814146948938
+    api-secret: 0JJD0VsvnuB-79RyVWDKFHeiYfI
+  aws:
+    credentials:
+      access-key: AKIAY2SY7RTOZHCNCC7T
+      secret-key: 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
+    region:
+      static: us-east-2
+    stack:
+      auto: false
+
+application:
+  bucket:
+    name: storagesavefile
+
+feign:
+  circuitbreaker:
+    enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: basic
+  system-alias: alias-code
+  upload_folder_alias: root
+  file_url:
+  token: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJzeXN0ZW1fYWRtaW4iLCJzY29wZSI6WyJhbGwiXSwiaWQiOjM4NywiZXhwIjoxNjgyNDQyMjY1LCJpYXQiOjE2ODI0MzkyNjUsImF1dGhvcml0aWVzIjpbInVhYXBlci0xNiIsIlNZU1RFTV9BRE1JTi0zMSJdLCJqdGkiOiJ5VFNhMDJWcWdxNWxUV1AtMGgyRExRbVZBMm8iLCJjbGllbnRfaWQiOiJ0ZXN0In0.YI9DkwTc08doBqhFjHQbJfuCXpYJHM0JCd9BSJqozQtUHfDtpD44AmrWSGOL9iIyBIh9hAwWqXOx5AqXk5WXgflrJ24cjxiRE_ArhbWt1qXOlqzvDi-qWuUhAowNd5emTNpF6jT0A-r4DvbdFA8p9AldNSDfWC2OHIUNPlpzail-AdFm2cn8XxShqbQBaKvV03djiUYqrYbcp0bQSajwhUMPdfP9j5zgA6O6W975bv3pEBcapkwqPzsVvv2XSkjOHArdSRIvnYTpp8VflPY6xpOdTm5N2hp1ip9SjOJRLX2fz0HVmGleY9s_rqeUjHoEWgFnRWrtkYZ-Zj8lS2xGiQ
+
+
+
